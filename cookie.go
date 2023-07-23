@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func ReadFromCookie(r *http.Request) (*Session, error) {
+func ReadFromCookies(r *http.Request) (*Session, error) {
 	cookie, err := r.Cookie("session")
 	if err != nil {
 		return nil, ErrCookieReading
@@ -19,7 +19,7 @@ func ReadFromCookie(r *http.Request) (*Session, error) {
 	return session, nil
 }
 
-func WriteToCookie(w http.ResponseWriter, session *Session) {
+func WriteToCookies(w http.ResponseWriter, session *Session) {
 	c := http.Cookie{
 		Name:    "session",
 		Value:   session.Base64(),
